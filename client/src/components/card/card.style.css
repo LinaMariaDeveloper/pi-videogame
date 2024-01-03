@@ -1,0 +1,13 @@
+.container-card {
+  display: flex;
+  flex-direction: column;
+  background-color: #E8EAF6;
+  border: 1px solid blueviolet;
+  border-radius: 5px;
+  padding: 25px;
+  cursor: pointer;
+}
+
+.image-card {
+  max-width: 150px;
+}

@@ -1,13 +1,19 @@
-import './cards.style.css';
+import './cards.styles.css';
 import Card from "../card/card.component"
 
-function Cards({allGames}) {
-  const gameslist = allGames
+function Cards({games}) {
+
+const cards = []
+
+if(games){
+  for(let game of games){
+    cards.push(<Card key={game.id} game={game}/>)
+  }
+}
 
   return (
-    <div>
-      {gameslist && gameslist.map(game =>
-        <Card game = {game}/>)}
+    <div className='list-cards'>
+      {cards}
     </div>
   );
 }

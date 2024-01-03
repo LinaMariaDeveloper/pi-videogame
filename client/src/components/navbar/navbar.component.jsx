@@ -1,9 +1,20 @@
-import './navbar.style.css';
+import './navbar.styles.css';
+import { Link } from "react-router-dom"
+import React from 'react';
 
 function Navbar() {
+
   return (
-    <div>
-      <h1>Esta es la navbar</h1>
+    <div className='search'>
+      <Link to="/">
+      <button>Landing</button>
+      </Link>
+      <Link to="/search">
+      <button>Buscar Por Nombre</button> 
+      </Link>
+      <Link to="/form">
+        <button>Crear Videojuego</button>
+      </Link>
     </div>
   );
 }

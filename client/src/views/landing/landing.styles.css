@@ -1,0 +1,44 @@
+.landing-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+  width: 100%;
+  height: 100vh;
+}
+
+.landing-container img {
+  margin: 10px;
+  border-radius: 50%;
+}
+
+.landing-container div {
+  background-image: url("https://articles-img.sftcdn.net/t_articles/auto-mapping-folder/sites/2/2023/05/project-zero.jpg");
+  margin: 10px;
+  border-radius: 10px;
+}
+
+.landing-container p {
+  text-align: center;
+  color: white;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.title{
+  color: #E8EAF6;
+  text-align: center;
+  font-weight: bold;
+}
+
+.button-home{
+  text-align: center;
+}
+
+.button-home button{
+  width: auto;
+  font-size: 25px;
+  margin: 10px;
+  background-color: blueviolet;
+  cursor: pointer;
+  color: white;
+}
