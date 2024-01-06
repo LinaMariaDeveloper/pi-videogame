@@ -6,9 +6,7 @@ function Navbar() {
 
   return (
     <div className='search'>
-      <Link to="/">
-      <button>Landing</button>
-      </Link>
+      <Link to="/">Landing</Link>
       <Link to="/search">
       <button>Buscar Por Nombre</button> 
       </Link>

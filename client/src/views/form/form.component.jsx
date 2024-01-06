@@ -18,160 +18,163 @@ function Form() {
     release: "",
     rating: 0,
     genres: [],
-    platforms: [],
+    platforms: []
   });
 
-  const [errors, setErrors] = useState({ 
+  const [errors, setErrors] = useState({
     name: "",
     description: "",
     image: "",
     release: "",
-    rating: 0,
-    genres: [],
-    platforms: [],
-})
-
-function handleChange (event){
-  setGame({
-    ...game, [event.target.name]: event.target.value
+    rating: "",
+    genres: "",
+    platforms: ""
   })
-
-  setErrors(
-    validate({
-      ...game,
-      [event.target.name]: event.target.value,
-    })
-  )
-}
 
   useEffect(() => {
     dispatch(getGenres());
-  }, [genres]);
+  }, []);
 
   useEffect(() => {
     dispatch(getPlatforms());
-  }, [platforms]);
+  }, []);
 
-  const changeInput = (e) => {
-    if (e.target.name === "genres" || e.target.name === "platforms") {
-    const array = game[e.target.name];
-    setGame({
+
+  function handleChange(event) {
+    if (event.target.name === "genres" || event.target.name === "platforms") {
+      let array = game[event.target.name];
+      const currentValue = parseInt(event.target.value)
+
+      if (event.target.checked) {
+        array.push(currentValue)
+      } else {
+        array = array.filter(item => item !== currentValue)
+      }
+
+      setGame({
         ...game,
-        [e.target.name]: array.concat(parseInt(e.target.value)),
+        [event.target.name]: array,
       });
     } else {
-    setGame({
+      setGame({
         ...game,
-        [e.target.name]: e.target.value,
+        [event.target.name]: event.target.value,
       });
     }
-  };
+
+    setErrors(
+      validate({
+        ...game,
+        [event.target.name]: event.target.value,
+      })
+    )
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const obj = {
-    name: game.name,
-    description: game.description,
-    image: game.image,
-    release: game.release,
-    rating: parseInt(game.rating),
-    genres: [...new Set(game.genres)],
-    platforms: [...new Set(game.platforms)],
+      name: game.name,
+      description: game.description,
+      image: game.image,
+      release: game.release,
+      rating: parseInt(game.rating),
+      genres: [...new Set(game.genres)],
+      platforms: [...new Set(game.platforms)],
     };
 
-    
+
     if (!obj.name || !obj.description || !obj.release || !obj.rating) {
-        alert("Faltan datos por completar.")
-        return
+      alert("Faltan datos por completar.")
+      return
     }
     if (obj.genres.length === 0 || obj.platforms.length === 0) {
-        alert("Faltan datos por completar .")
-        return
+      alert("Faltan datos por completar .")
+      return
     }
 
     dispatch(postVideogames(obj));
-    e.target.reset();
     alert("Videojuego creado con exito");
 
     setGame({
-        name: "",
-        description: "",
-        image: "",
-        release: "",
-        rating: 0,
-        genres: [],
-        platforms: [],
+      name: "",
+      description: "",
+      image: "",
+      release: "",
+      rating: 0,
+      genres: [],
+      platforms: [],
     });
+  };
 
-};
   return (
     <div>
       <h1 className="title">CREA TU VIDEOJUEGO</h1>
-      <form className="form" onChange={(e) => changeInput(e)} onSubmit={(e) => handleSubmit(e)}>
+      <form className="form" onSubmit={handleSubmit}>
         <label className="label" htmlFor="name">Nombre</label>
-        <input type="text" name="name" value={game.name} onChange={handleChange}/>
+        <input type="text" name="name" value={game.name} onChange={handleChange} />
+        <div>{game.name.length}/50</div>
         {errors.name && (
-            <h5 style={{color:'red'}}>
-              <span>{errors.name}</span>
-            </h5>
-          )}
+          <h5 style={{ color: 'red' }}>
+            <span>{errors.name}</span>
+          </h5>
+        )}
         <label className="label" htmlFor="description">Descripcion</label>
         <textarea name="description" value={game.description} onChange={handleChange} rows="8"></textarea>
         {errors.description && (
-            <h5 style={{color:'red'}}>
-              <span>{errors.description}</span>
-            </h5>
-          )}
+          <h5 style={{ color: 'red' }}>
+            <span>{errors.description}</span>
+          </h5>
+        )}
         <label className="label" htmlFor="release">Fecha de Lanzamiento</label>
-        <input type="date" name="release" value={game.release} onChange={handleChange}/>
+        <input type="date" name="release" value={game.release} onChange={handleChange} />
         {errors.release && (
-            <h5 style={{color:'red'}}>
-              <span>{errors.release}</span>
-            </h5>
-          )}
+          <h5 style={{ color: 'red' }}>
+            <span>{errors.release}</span>
+          </h5>
+        )}
         <label className="label" htmlFor="rating">Raking</label>
-        <input type="number" name="rating" min="0" max="5" value={game.rating} onChange={handleChange}/>
+        <input type="number" name="rating" min="0" max="5" value={game.rating} onChange={handleChange} />
         {errors.rating && (
-            <h5 style={{color:'red'}}>
-              <span>{errors.rating}</span>
-            </h5>
-          )}
+          <h5 style={{ color: 'red' }}>
+            <span>{errors.rating}</span>
+          </h5>
+        )}
         <label className="label" htmlFor="genres">Generos:</label>
         <div className='box'>
-            {genres.map((gen) => (
-                <div key={gen.id}>
-                  <input type="checkbox" name="genres" value={gen.id} onChange={handleChange}/>
-                  {errors.genres && (
-                    <h5 style={{color:'red'}}>
-                      <span>{errors.genres}</span>
-                    </h5>
-                  )}
-                  <label name={gen}>{gen.name}</label>
-                </div>
-              ))}
+          {genres.map((gen) => (
+            <div key={gen.id}>
+              <input type="checkbox" name="genres" value={gen.id} onChange={handleChange} />
+              {errors.genres && (
+                <h5 style={{ color: 'red' }}>
+                  <span>{errors.genres}</span>
+                </h5>
+              )}
+              <label name={gen}>{gen.name}</label>
+            </div>
+          ))}
         </div>
         <label className="label" htmlFor="platforms">Plataformas</label>
         <div className='box'>
-            {platforms.map((gen) => (
-                <div key={gen.id}>
-                  <input type="checkbox" name="platforms" value={gen.id} onChange={handleChange}/>
-                  {errors.platforms && (
-                    <h5 style={{color:'red'}}>
-                      <span>{errors.platforms}</span>
-                    </h5>
-                  )}
-                  <label name={gen}>{gen.name}</label>
-                </div>
-              ))}
+          {platforms.map((gen) => (
+            <div key={gen.id}>
+              <input type="checkbox" name="platforms" value={gen.id} onChange={handleChange} />
+              {errors.platforms && (
+                <h5 style={{ color: 'red' }}>
+                  <span>{errors.platforms}</span>
+                </h5>
+              )}
+              <label name={gen}>{gen.name}</label>
+            </div>
+          ))}
         </div>
         <label className="label" htmlFor="image">Imagen URL</label>
-        <input type="text" name="image" value={game.image} onChange={handleChange}/>
+        <input type="text" name="image" value={game.image} onChange={handleChange} />
         {errors.image && (
-                    <h5 style={{color:'red'}}>
-                      <span>{errors.image}</span>
-                    </h5>
-                  )}
+          <h5 style={{ color: 'red' }}>
+            <span>{errors.image}</span>
+          </h5>
+        )}
         <button type="submit">Crear</button>
       </form>
       <Link to="/home">
