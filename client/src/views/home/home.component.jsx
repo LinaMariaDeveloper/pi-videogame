@@ -19,12 +19,12 @@ function Home() {
 
   function handleOrigin(event){
     setOrigin(event.target.value)
-    dispatch(getVideogames(dataGames.page, item, order, event.target.value, genre))
+    dispatch(getVideogames(1, item, order, event.target.value, genre))
  }
 
   function handleGenre(event){
   setGenres(event.target.value)
-  dispatch(getVideogames(dataGames.page, item, order, origin, event.target.value))
+  dispatch(getVideogames(1, item, order, origin, event.target.value))
   }
 
   function handleOrder(event){

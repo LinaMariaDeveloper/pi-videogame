@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { postVideogames, getGenres, getPlatforms } from '../../redux/actions';
 import { Link } from "react-router-dom"
+import validate from "../../utils/validation"
 
 function Form() {
   const dispatch = useDispatch();
@@ -20,13 +21,36 @@ function Form() {
     platforms: [],
   });
 
+  const [errors, setErrors] = useState({ 
+    name: "",
+    description: "",
+    image: "",
+    release: "",
+    rating: 0,
+    genres: [],
+    platforms: [],
+})
+
+function handleChange (event){
+  setGame({
+    ...game, [event.target.name]: event.target.value
+  })
+
+  setErrors(
+    validate({
+      ...game,
+      [event.target.name]: event.target.value,
+    })
+  )
+}
+
   useEffect(() => {
     dispatch(getGenres());
-  }, []);
+  }, [genres]);
 
   useEffect(() => {
     dispatch(getPlatforms());
-  }, []);
+  }, [platforms]);
 
   const changeInput = (e) => {
     if (e.target.name === "genres" || e.target.name === "platforms") {
@@ -35,8 +59,6 @@ function Form() {
         ...game,
         [e.target.name]: array.concat(parseInt(e.target.value)),
       });
-      console.log("HOLAAA")
-      console.log(game)
     } else {
     setGame({
         ...game,
@@ -59,19 +81,12 @@ function Form() {
     };
 
     
-  
-    if (!obj.name) {
-        alert("Debe poner un nombre.")
+    if (!obj.name || !obj.description || !obj.release || !obj.rating) {
+        alert("Faltan datos por completar.")
         return
     }
-    if (!obj.description) {
-        alert("Debe agregar una descripción.")
-        return
-    }if (!obj.release) {
-        alert("Debe poner un año.")
-        return
-    }if (obj.rating > 5 || obj.rating < 0) {
-        alert("El rating debe ser un numero entre 0 y 5")
+    if (obj.genres.length === 0 || obj.platforms.length === 0) {
+        alert("Faltan datos por completar .")
         return
     }
 
@@ -88,24 +103,50 @@ function Form() {
         genres: [],
         platforms: [],
     });
+
 };
   return (
     <div>
       <h1 className="title">CREA TU VIDEOJUEGO</h1>
       <form className="form" onChange={(e) => changeInput(e)} onSubmit={(e) => handleSubmit(e)}>
         <label className="label" htmlFor="name">Nombre</label>
-        <input type="text" name="name" value={game.name}/>
+        <input type="text" name="name" value={game.name} onChange={handleChange}/>
+        {errors.name && (
+            <h5 style={{color:'red'}}>
+              <span>{errors.name}</span>
+            </h5>
+          )}
         <label className="label" htmlFor="description">Descripcion</label>
-        <input type="text" name="description" value={game.description}/>
+        <textarea name="description" value={game.description} onChange={handleChange} rows="8"></textarea>
+        {errors.description && (
+            <h5 style={{color:'red'}}>
+              <span>{errors.description}</span>
+            </h5>
+          )}
         <label className="label" htmlFor="release">Fecha de Lanzamiento</label>
-        <input type="date" name="release" value={game.release}/>
+        <input type="date" name="release" value={game.release} onChange={handleChange}/>
+        {errors.release && (
+            <h5 style={{color:'red'}}>
+              <span>{errors.release}</span>
+            </h5>
+          )}
         <label className="label" htmlFor="rating">Raking</label>
-        <input type="number" name="rating" value={game.rating}/>
+        <input type="number" name="rating" min="0" max="5" value={game.rating} onChange={handleChange}/>
+        {errors.rating && (
+            <h5 style={{color:'red'}}>
+              <span>{errors.rating}</span>
+            </h5>
+          )}
         <label className="label" htmlFor="genres">Generos:</label>
         <div className='box'>
             {genres.map((gen) => (
                 <div key={gen.id}>
-                  <input type="checkbox" name="genres" value={gen.id}/>
+                  <input type="checkbox" name="genres" value={gen.id} onChange={handleChange}/>
+                  {errors.genres && (
+                    <h5 style={{color:'red'}}>
+                      <span>{errors.genres}</span>
+                    </h5>
+                  )}
                   <label name={gen}>{gen.name}</label>
                 </div>
               ))}
@@ -114,13 +155,23 @@ function Form() {
         <div className='box'>
             {platforms.map((gen) => (
                 <div key={gen.id}>
-                  <input type="checkbox" name="platforms" value={gen.id}/>
+                  <input type="checkbox" name="platforms" value={gen.id} onChange={handleChange}/>
+                  {errors.platforms && (
+                    <h5 style={{color:'red'}}>
+                      <span>{errors.platforms}</span>
+                    </h5>
+                  )}
                   <label name={gen}>{gen.name}</label>
                 </div>
               ))}
         </div>
         <label className="label" htmlFor="image">Imagen URL</label>
-        <input type="text" name="image" value={game.image}/>
+        <input type="text" name="image" value={game.image} onChange={handleChange}/>
+        {errors.image && (
+                    <h5 style={{color:'red'}}>
+                      <span>{errors.image}</span>
+                    </h5>
+                  )}
         <button type="submit">Crear</button>
       </form>
       <Link to="/home">

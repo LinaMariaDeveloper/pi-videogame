@@ -22,10 +22,10 @@ function Detail() {
             genres: [],
             platforms: []
           }
-          for(let genre of data.Genres){
+          for(let genre of data.genres){
             videogameData.genres.push(<span>{genre.name}</span>)
           }
-          for(let platform of data.Platforms){
+          for(let platform of data.platforms){
             videogameData.platforms.push(<span>{platform.name}</span>)
           }
           return setVideogame(videogameData);

@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 
 function Card({game}) {
   
-  const { id, name, image, Genres } = game
+  const { id, name, image, genres } = game
   const gen = []
 
-  for(let genre of Genres){
+  for(let genre of genres){
     gen.push(<span>{genre.name}</span>)
   }
 

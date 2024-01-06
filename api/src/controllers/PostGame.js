@@ -17,7 +17,6 @@ const PostGame = async (req, res) => {
       await gameCreated.addGenre(genre)
     })
 
-    
     platforms.forEach(async (platformFound) => {
       const platform = await Platforms.findOne({ where: { id: platformFound } })
       await gameCreated.addPlatform(platform)

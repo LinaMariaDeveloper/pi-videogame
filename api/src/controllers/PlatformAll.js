@@ -1,12 +1,11 @@
 const { Platforms } = require('../db')
 
 const PlatformAll = async (req, res) => {
-
   try {
     let platformDB = await Platforms.findAll()
-    res.status(200).json(platformDB)   
+    res.status(200).json(platformDB)
   } catch (error) {
-    res.status(404).json({ message: error.message })    
+    res.status(404).json({ message: error.message })
   }
 }
 

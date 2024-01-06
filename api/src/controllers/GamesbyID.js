@@ -1,7 +1,9 @@
 require("dotenv").config()
+const parseAPIGames = require('../utils')
+
 const { KEY } = process.env
 const axios = require('axios')
-const { Videogame, Genres, Platforms} = require('../db.js')
+const { Videogame, Genres, Platforms } = require('../db.js')
 
 const GamebyID = async (req, res) => {
 
@@ -14,22 +16,12 @@ const GamebyID = async (req, res) => {
       const { data } = await axios.get(`https://api.rawg.io/api/games/${newId}?key=${KEY}`)
 
       if (data) {
-        const { id, name, description, background_image, rating, platforms, released, genres } = data
-        const platGame = platforms.map(platform => {
-          const { name, id } = platform.platform
-          return { name, id }
-        })
-        const genre = genres.map(gen => {
-          const { name, id } = gen
-          return { name, id }
-        })
-        result = {
-          id: `A${id}`, name, description, image: background_image, rating, Platforms: platGame, released, Genres: genre
-        }
+        result = parseAPIGames(data)
       }
-    } else { 
-      result = await Videogame.findOne({ where: {id: reqId}, include: [Genres, Platforms]})
-      if(!result){
+    } else {
+      result = await Videogame.findOne({ where: { id: reqId }, include: [Genres, Platforms] })
+      
+      if (!result) {
         res.status(404).json({ message: 'Not found in database' })
       }
     }

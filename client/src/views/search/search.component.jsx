@@ -18,6 +18,10 @@ function Search() {
     dispatch(getvideogameName(search))
   }
 
+  if(dataGames.results && dataGames.results.length === 0){
+    alert("No se encontraron juegos.")
+  }
+
   return (
     <div className="Search-container">
       <div className='Search'>
