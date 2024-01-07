@@ -3,6 +3,18 @@
 
 * {
   font-family: 'Genos', sans-serif;
+  font-size: 20px;
+}
+
+.main,
+.navbar a,
+.container {
+  /* Safari/Chrome, other WebKit */
+  -webkit-box-sizing: border-box;
+  /* Firefox, other Gecko */
+  -moz-box-sizing: border-box;
+  /* Opera/IE 8+ */
+  box-sizing: border-box;
 }
 
 body {
@@ -10,22 +22,21 @@ body {
   padding: 0;
 }
 
-.tittle {}
+.title {
+  font-size: 50px;
+  font-weight: bold;
+}
 
 /* Estructura */
 
 .main {
-  /* Safari/Chrome, other WebKit */
-  -webkit-box-sizing: border-box;
-  /* Firefox, other Gecko */
-  -moz-box-sizing: border-box;
-  /* Opera/IE 8+ */
-  box-sizing: border-box;
   min-height: 100vh;
   padding-top: 64px;
 }
 
-.container {}
+.container {
+  padding: 10px 5%;
+}
 
 /* Componentes */
 
@@ -42,29 +53,55 @@ body {
 }
 
 .navbar a {
-  border: 1px solid red;
+  display: inline-block;
+  height: 64px;
+  padding: 0px 10px;
+  font-weight: bold;
+  text-decoration: none;
+  line-height: 64px;
 }
 
-.background {}
-
-.pagination {}
-
-.avatar {}
-
-
-.info-project {
-  background-color: rosybrown;
+.navbar a img {
+  vertical-align: middle;
 }
 
-.info-lina {
-  background-color: aqua;
+.container-box {
+  margin-bottom: 40px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.container-box img {
+  border-radius: 10px;
+}
+
+.button {
+  font-weight: bold;
+  text-decoration: none;
+  border: 1px solid black;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
+.pr {
+  padding-right: 40px;
+}
+
+.pl {
+  padding-left: 40px;
+}
+
+.options, .pagination {
+  text-align: center;
+  margin: 10px;
+}
+
+.options select, .pagination button{
+  margin: 0px 10px;
 }
 
 /* Etiquetas */
-
-link {}
-
-button {}
 
 input {}
 

@@ -2,7 +2,7 @@ import './App.css';
 import { Route, Routes } from "react-router-dom"
 import Navbar from './components/navbar/navbar.component.jsx'
 import Landing from "./views/landing.component.jsx"
-// import Home from "./views/home/home.component"
+import Home from "./views/home.component.jsx"
 // import Detail from "./components/detail/detail.component.jsx"
 // import Form from "./views/form/form.component.jsx"
 // import Search from './views/search/search.component.jsx';
@@ -14,8 +14,8 @@ function App() {
       <div className='main'>
         <Routes>
           <Route path="/" element={<Landing />} />
-          {/* <Route path="/home" element={<Home/>}/>
-        <Route path='/search' element={<Search/>}/>
+          <Route path="/home" element={<Home/>}/>
+        {/* <Route path='/search' element={<Search/>}/>
         <Route path="/detail/:id" element={<Detail/>}/>
         <Route path="/form" element={<Form/>}/> */}
         </Routes>
