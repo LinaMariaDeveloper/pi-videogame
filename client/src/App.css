@@ -4,6 +4,13 @@
 * {
   font-family: 'Genos', sans-serif;
   font-size: 20px;
+  color: white;
+}
+
+button,
+input,
+select {
+  color: black;
 }
 
 .main,
@@ -20,6 +27,7 @@
 body {
   margin: 0;
   padding: 0;
+  background: rgb(26, 35, 126);
 }
 
 .title {
@@ -39,8 +47,6 @@ body {
 }
 
 /* Componentes */
-
-.card {}
 
 .navbar {
   display: flex;
@@ -79,7 +85,7 @@ body {
 .button {
   font-weight: bold;
   text-decoration: none;
-  border: 1px solid black;
+  border: 1px solid rgb(146, 143, 143);
   padding: 10px 20px;
   border-radius: 10px;
 }
@@ -92,19 +98,66 @@ body {
   padding-left: 40px;
 }
 
-.options, .pagination {
+.options,
+.pagination {
   text-align: center;
   margin: 10px;
 }
 
-.options select, .pagination button{
+.options select,
+.pagination button {
   margin: 0px 10px;
 }
 
-/* Etiquetas */
+.flex-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 
-input {}
+.flex-grid a {
+  text-decoration: none;
+}
 
-select {}
+.card {
+  border-radius: 10px;
+  width: 350px;
+  margin: 20px;
+  height: 200px;
+}
 
-textarea {}
+.card img {
+  border-radius: inherit;
+  width: 100%;
+  object-fit: cover;
+  height: 100%;
+  display: block;
+}
+
+.card-content {
+  position: relative;
+  display: flex;
+  align-items: end;
+  top: -200px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background: rgb(0, 0, 0);
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.7301120277212447) 0%, rgba(0, 0, 0, 0.2) 60%);
+}
+
+.card-content>div {
+  width: 100%;
+  padding: 10px;
+}
+
+.chip {
+  border-radius: 10px;
+  background-color: #004d40;
+  padding: 0px 5px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  display: inline-block;
+  font-size: 15px;
+}

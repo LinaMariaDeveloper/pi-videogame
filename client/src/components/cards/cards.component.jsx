@@ -1,4 +1,3 @@
-import './cards.styles.css';
 import Card from "../card/card.component"
 
 function Cards({games}) {
@@ -12,7 +11,7 @@ if(games){
 }
 
   return (
-    <div className='list-cards'>
+    <div className="flex-grid">
       {cards}
     </div>
   );
