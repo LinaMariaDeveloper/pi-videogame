@@ -1,21 +1,25 @@
 import './App.css';
 import { Route, Routes } from "react-router-dom"
-import Landing from "./views/landing/landing.component"
-import Home from "./views/home/home.component"
-import Detail from "./components/detail/detail.component.jsx"
-import Form from "./views/form/form.component.jsx"
-import Search from './views/search/search.component.jsx';
+import Navbar from './components/navbar/navbar.component.jsx'
+import Landing from "./views/landing.component.jsx"
+// import Home from "./views/home/home.component"
+// import Detail from "./components/detail/detail.component.jsx"
+// import Form from "./views/form/form.component.jsx"
+// import Search from './views/search/search.component.jsx';
 
 function App() {
   return (
-    <div>
-      <Routes>
-        <Route path="/" element={<Landing/>}/>
-        <Route path="/home" element={<Home/>}/>
+    <div className='app'>
+      <Navbar />
+      <div className='main'>
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          {/* <Route path="/home" element={<Home/>}/>
         <Route path='/search' element={<Search/>}/>
         <Route path="/detail/:id" element={<Detail/>}/>
-        <Route path="/form" element={<Form/>}/>
-      </Routes>
+        <Route path="/form" element={<Form/>}/> */}
+        </Routes>
+      </div>
     </div>
   );
 }

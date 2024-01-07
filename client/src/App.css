@@ -1,38 +1,73 @@
-.App {
-  text-align: center;
+/* Textos */
+@import url('https://fonts.googleapis.com/css2?family=Genos:wght@400;700&display=swap');
+
+* {
+  font-family: 'Genos', sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  margin: 0;
+  padding: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
+.tittle {}
 
-.App-header {
-  background-color: #282c34;
+/* Estructura */
+
+.main {
+  /* Safari/Chrome, other WebKit */
+  -webkit-box-sizing: border-box;
+  /* Firefox, other Gecko */
+  -moz-box-sizing: border-box;
+  /* Opera/IE 8+ */
+  box-sizing: border-box;
   min-height: 100vh;
+  padding-top: 64px;
+}
+
+.container {}
+
+/* Componentes */
+
+.card {}
+
+.navbar {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-between;
+  height: 64px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
 }
 
-.App-link {
-  color: #61dafb;
+.navbar a {
+  border: 1px solid red;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.background {}
+
+.pagination {}
+
+.avatar {}
+
+
+.info-project {
+  background-color: rosybrown;
 }
+
+.info-lina {
+  background-color: aqua;
+}
+
+/* Etiquetas */
+
+link {}
+
+button {}
+
+input {}
+
+select {}
+
+textarea {}

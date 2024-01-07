@@ -1,18 +1,22 @@
-import './navbar.styles.css';
 import { Link } from "react-router-dom"
 import React from 'react';
+import game from '../../assets/game.jpg'
 
 function Navbar() {
 
   return (
-    <div className='search'>
-      <Link to="/">Landing</Link>
-      <Link to="/search">
-      <button>Buscar Por Nombre</button> 
-      </Link>
-      <Link to="/form">
-        <button>Crear Videojuego</button>
-      </Link>
+    <div className="navbar">
+      <div>
+        <Link to="/">
+          <img src={game} alt='' />
+          <span>Landing</span>
+        </Link>
+      </div>
+      <div>
+        <Link to='/home'>Home</Link>
+        <Link to="/search">Buscar Por Nombre</Link>
+        <Link to="/form">Crear Videojuego</Link>
+      </div>
     </div>
   );
 }

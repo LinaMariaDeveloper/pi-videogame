@@ -1,11 +1,15 @@
-import './landing.styles.css';
-import Lina from "../../assets/lina.jpg"
+import Lina from "../assets/lina.jpg"
 import {Link} from "react-router-dom"
 
 function Landing() {
   return (
-    <div>
-      <h1 className='title'>LANDING PAGE</h1>
+    <div className="container">
+      <div className="info-project">
+        <div>PROJECT</div>
+        <div></div>
+      </div>
+      <div className="info-lina">LINA</div>
+      {/* <h1 className='title'>LANDING PAGE</h1>
       <div className='landing-container'>
         <img src={Lina} alt="" width="400px"/>
         <div>
@@ -22,7 +26,7 @@ function Landing() {
         <Link to="/home">
           <button>Home</button>
         </Link>
-      </div>
+      </div> */}
     </div>
   );
 }
