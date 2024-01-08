@@ -2,13 +2,14 @@ import React from 'react';
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { postVideogames, getGenres, getPlatforms } from '../redux/actions';
-import { Link } from "react-router-dom"
+import axios from 'axios';
 import validate from "../utils/validation"
 
 function Form() {
   const dispatch = useDispatch();
   const genres = useSelector((store) => store.allGenres);
   const platforms = useSelector((store) => store.allPlatforms)
+  const postgame = useSelector((store) => store.newVideogame)
 
   const [game, setGame] = useState({
     name: "",
@@ -93,22 +94,24 @@ function Form() {
     }
 
     dispatch(postVideogames(obj));
-    alert("Videojuego creado con exito");
 
-    setGame({
-      name: "",
-      description: "",
-      image: "",
-      release: "",
-      rating: 0,
-      genres: [],
-      platforms: [],
-    });
+    if(!postgame.error){
+      setGame({
+        name: "",
+        description: "",
+        image: "",
+        release: "",
+        rating: 0,
+        genres: [],
+        platforms: [],
+      });
+    }
   };
 
   return (
     <div className="container">
       <div className="title">¡CREA TU VIDEOJUEGO!</div>
+      <div className='error'>{postgame.message}</div>
       <form onSubmit={handleSubmit}>
         <div className='form-field'>
           <label htmlFor="name">Nombre</label>
@@ -138,7 +141,7 @@ function Form() {
         <div className="form-field">
           <label>Generos</label>
           {genres.map((gen) => (
-            <div className='checkbox'>
+            <div key={gen.id} className='checkbox'>
               <input id="genres" type="checkbox" name="genres" value={gen.id} onChange={handleChange} />
               <label htmlFor="genres" name={gen}>{gen.name}</label>
             </div>
@@ -148,7 +151,7 @@ function Form() {
         <div className="form-field">
           <label>Plataformas</label>
           {platforms.map((gen) => (
-            <div className='checkbox'>
+            <div key={gen.id} className='checkbox'>
               <input id="platforms" type="checkbox" name="platforms" value={gen.id} onChange={handleChange} />
               <label htmlFor="platforms" name={gen}>{gen.name}</label>
             </div>

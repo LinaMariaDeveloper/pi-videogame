@@ -4,7 +4,7 @@ let initialState = {
   allVideogames: [], 
   allGenres: [], 
   allPlatforms: [], 
-  newVideogame: [],
+  newVideogame: {},
   videogameName: []
 }
 

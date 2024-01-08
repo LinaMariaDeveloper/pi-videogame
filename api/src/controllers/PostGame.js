@@ -4,6 +4,14 @@ const PostGame = async (req, res) => {
   try {
     const { name, description, image, release, rating, platforms, genres } = req.body
 
+    const gameValidation = await Videogame.findOne({
+      where: { name: name },
+    });
+
+    if (gameValidation) {
+      return res.status(403).send({ message: "El videojuego ya existe" });
+    }
+
     let gameCreated = await Videogame.create({
       name,
       description,
@@ -22,7 +30,7 @@ const PostGame = async (req, res) => {
       await gameCreated.addPlatform(platform)
     })
 
-    res.status(200).json('Videogame created successfully')
+    res.status(200).json({ message: 'Videojuego creado con exito' })
   } catch (error) {
     res.status(500).json({ message: error.message })
   }

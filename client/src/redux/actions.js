@@ -1,7 +1,7 @@
 import axios from "axios"
-import {GET_VIDEOGAMES, GET_GENRES, POST_VIDEOGAME, GET_PLATFORMS, GET_NAME} from "./actions-type"
+import { GET_VIDEOGAMES, GET_GENRES, POST_VIDEOGAME, GET_PLATFORMS, GET_NAME } from "./actions-type"
 
-const getVideogames = (page, orderby, asc, origin, genre) =>{
+const getVideogames = (page, orderby, asc, origin, genre) => {
   const endpoint = `http://localhost:3001/videogames`
   return (dispatch) => {
     axios.get(endpoint, {
@@ -12,7 +12,7 @@ const getVideogames = (page, orderby, asc, origin, genre) =>{
         origin,
         genre
       }
-    }).then(({data}) =>{
+    }).then(({ data }) => {
       return dispatch({
         type: GET_VIDEOGAMES,
         payload: data
@@ -21,10 +21,10 @@ const getVideogames = (page, orderby, asc, origin, genre) =>{
   }
 }
 
-const getGenres = () =>{
+const getGenres = () => {
   const endpoint = 'http://localhost:3001/genres'
   return (dispatch) => {
-    axios.get(endpoint).then(({data}) => {
+    axios.get(endpoint).then(({ data }) => {
       return dispatch({
         type: GET_GENRES,
         payload: data
@@ -33,10 +33,10 @@ const getGenres = () =>{
   }
 }
 
-const getPlatforms = () =>{
+const getPlatforms = () => {
   const endpoint = 'http://localhost:3001/platforms'
   return (dispatch) => {
-    axios.get(endpoint).then(({data}) => {
+    axios.get(endpoint).then(({ data }) => {
       return dispatch({
         type: GET_PLATFORMS,
         payload: data
@@ -49,19 +49,24 @@ const getPlatforms = () =>{
 const postVideogames = (obj) => {
   const endpoint = 'http://localhost:3001/videogames';
   return (dispatch) => {
-     axios.post(endpoint, obj).then(({ data }) => {
-        return dispatch({
-           type: POST_VIDEOGAME,
-           payload: data,
-        });
-     });
+    axios.post(endpoint, obj).then(({ data }) => {
+      return dispatch({
+        type: POST_VIDEOGAME,
+        payload: data,
+      });
+    }).catch((error) => {
+      return dispatch({
+        type: POST_VIDEOGAME,
+        payload: { ...error.response.data, error: true },
+      });
+    });
   };
 };
 
 const getvideogameName = (name) => {
   const endpoint = `http://localhost:3001/videogames/name?name=${name}`
   return (dispatch) => {
-    axios.get(endpoint).then(({data}) => {
+    axios.get(endpoint).then(({ data }) => {
       return dispatch({
         type: GET_NAME,
         payload: data,
@@ -71,4 +76,4 @@ const getvideogameName = (name) => {
 }
 
 
-export { getVideogames, getGenres, postVideogames, getPlatforms, getvideogameName}
+export { getVideogames, getGenres, postVideogames, getPlatforms, getvideogameName }
