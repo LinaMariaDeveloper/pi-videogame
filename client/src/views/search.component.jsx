@@ -1,9 +1,7 @@
-import './search.styles.css';
-import Cards from "../../components/cards/cards.component"
+import Cards from "../components/cards.component"
 import { useEffect, useState} from "react"
-import { getvideogameName } from '../../redux/actions';
+import { getvideogameName } from '../redux/actions';
 import { useDispatch, useSelector } from "react-redux";
-import {Link} from "react-router-dom"
 
 function Search() {
   const dispatch = useDispatch()
@@ -18,18 +16,11 @@ function Search() {
     dispatch(getvideogameName(search))
   }
 
-  if(dataGames.results && dataGames.results.length === 0){
-    alert("No se encontraron juegos.")
-  }
-
   return (
-    <div className="Search-container">
-      <div className='Search'>
+    <div className="container">
+      <div className="toolbar">
         <input value={search} placeholder='Buscar' onChange={handleChange}/>
-        <button onClick={onSearch}>Buscar</button>
-        <Link to="/home">
-          <button>Home</button>
-        </Link>
+        <button className="button" onClick={onSearch}>Buscar</button>
       </div>
       <Cards games={dataGames.results}/>
     </div>

@@ -23,17 +23,6 @@ function Card({ game }) {
       </div>
     </div>
     </Link>
-    // <div className="container">
-    //   <div>
-    //     <img src={image} alt='' />
-    //   </div>
-    //   <div>
-    //     <Link to={`/detail/${id}`}>
-    //       <span>{name}</span>
-    //     </Link>
-    //     <div>{gen}</div>
-    //   </div>
-    // </div>
   );
 }
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getGenres, getVideogames } from "../redux/actions"
-import Cards from "../components/cards/cards.component"
+import Cards from "../components/cards.component"
 
 
 function Home() {

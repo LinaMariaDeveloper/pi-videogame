@@ -5,20 +5,20 @@ export default function validate (game){
     description: "",
     image: "",
     release: "",
-    rating: 0,
-    genres: [],
-    platforms: [],
+    rating: "",
+    genres: "",
+    platforms: "",
   }
   
   if(!game.name){
     errors.name ="El nombre es requerido"
-  } else if (game.name.length >= 50){
+  } else if (game.name.length > 50){
     errors.name ="El nombre no puede tener mas de 50 caracteres"
   } 
   
   if(!game.description){
     errors.description ="La descripcion es requerida"
-  } else if (game.description.length >= 255){
+  } else if (game.description.length > 255){
     errors.description ="La descripción no puede tener mas de 255 caracteres"
   }
 
@@ -26,17 +26,20 @@ export default function validate (game){
     errors.release = "Requiere una fecha de creación"
   }
 
-  if(game.rating > 5 || game.rating < 0){
-    errors.rating ="El rating debe ser un numero entre 0 y 5"
-  } else if(!/[0-9]/.test(game.rating)){
+  if(game.rating > 5){
+    errors.rating ="El rating no puede ser mayor a 5"
+  } else if (game.rating < 0) {
+    errors.rating ="El rating no debe ser menor a 0"
+  }
+  else if(!/[0-9]/.test(game.rating)){
     errors.rating ="Solo se permiten números"
   }
 
-  if(game.genres.length === 0){
+  if(!game.genres.length){
     errors.genres ="Debe seleccionar una opción "
   }
 
-  if(game.platforms.length === 0){
+  if(!game.platforms.length){
     errors.platforms ="Debe seleccionar una opción "
   }
 

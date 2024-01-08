@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import React from 'react';
-import game from '../../assets/game.jpg'
+import game from '../assets/game.jpg'
 
 function Navbar() {
 
